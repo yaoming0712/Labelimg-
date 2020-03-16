@@ -1,0 +1,16 @@
+label path 資料夾不要用中文
+
+執行公式
+python ./flow --model cfg/myyolo.cfg --train --dataset test/training/images --annotation test/training/annotations
+
+*cfg/myyolo.cfg 裡面的cfg要自己copy一個來改 不能直接改原先的cfg(ex:tiny-yolo.cfg)裡面參數直接用
+
+Q:UnicodeDecodeError: 'cp950' codec can't decode byte 0xe8 in position 22: illegal multibyte sequence
+A: open(...)後面加上open(....,encoding=''utf8')
+
+Q:sre_constants.error: bad character range 7-4 at position 23
+A:
+取drakflow裡找到 pascal_voc_clean_xml.py
+將annotations = glob.glob(str(annotations)+'*.xml')
+改成annotations = glob.glob('*.xml')
+
